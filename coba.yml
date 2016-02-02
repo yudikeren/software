@@ -1,0 +1,17 @@
+- hosts: localhost
+  tasks:
+  - name: Install Apache
+    yum: name=httpd state=latest
+  - name: install teman-temannya
+    yum: pkg={{ item }} state=latest
+    with_items:
+    - php
+    - php-common
+    - php-mysql
+#    - mysql
+#    - mysql-server
+
+  - name: download mysql
+    get_url: dest=/home/yudi/repo/mysql-community-release-el7-5.noarch.rpm  url=http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+  - name: instal mysql    
+    action: command rpm -ivh mysql-community-release-el7-5.noarch.rpm 
