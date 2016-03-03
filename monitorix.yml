@@ -1,0 +1,42 @@
+---
+- name: Install Monitorix ubuntu
+  sudo : yes
+  hosts: all
+  tasks:
+   - name: Install Depedensi
+     apt: pkg={{item}} state=latest
+     with_items:
+      - perl
+      - libwww-perl
+      - libmailtools-perl
+      - libmime-types-perl
+      - librrds-perl
+      - libdbi-perl
+      - libxml-simple-perl
+      - libhttp-server-simple-perl
+      - libconfig-general-perl
+      - libio-socket-ssl-perl
+      - librrd4
+      - libmime-lite-perl
+      - libemail-date-format-perl
+   - name: download monitorix
+     get_url: url=http://www.monitorix.org/monitorix_3.8.1-izzy1_all.deb dest=/home/deny/
+   - name: install monitorix
+     apt: deb=monitorix_3.8.1-izzy1_all.deb
+   - name: copy .conf file form the server
+     get_url: url=https://raw.githubusercontent.com/yudikeren/software/master/monitorix.conf dest=/etc/monitorix/
+   - name: configuring monitorix
+     lineinfile:
+       dest: /etc/monitorix/monitorix.conf
+       regexp: '{{ item.regexp }}'
+       line: '{{ item.line }}'
+     with_items:
+       - { regexp: '^title =', line: 'title = Monitoring Developer' }
+       - { regexp: '^hostname =', line: 'hostname = {{ansible_hostname}} develpers' }
+       - { regexp: '^refresh_rate =', line: 'refresh_rate = 10' }
+       - { regexp: '^from_address =', line: 'from_address = {{ansible_hostname}}@example.com' }
+   - name: Start Service Monitorix
+     service: name=monitorix state=started
+   - name: Open Firewall Ubuntu
+     ufw: state=start
+     ufw: rule=allow port=8080 proto=tcp
