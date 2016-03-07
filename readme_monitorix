@@ -1,0 +1,17 @@
+Monitorix adalah, aplikasi open source, alat monitoring sistem ringan gratis yang dirancang untuk memantau layanan dan sumber daya sistem sebanyak mungkin. monitorix diciptakan untuk server utama berbasiskan server Linux / UNIX, namun karena kesederhanaan dan ukuran kecil juga dapat digunakan untuk memantau perangkat embedded juga.
+Monitorix terdiri dari dua program: kolektor, yang disebut monitorix, yang merupakan daemon Perl yang dimulai secara otomatis seperti layanan sistem lainnya, dan script CGI yang disebut monitorix.cgi. Sejak versi 3.0 Monitorix sudah memasukkan layanan HTTP didalamnya, sehingga Anda tidak perlu menginstal web server untuk menggunakannya.
+Setiap kali monitorix membaca file konfigurasi pada command line (menggunakan opsi -c), monitorix menciptakan file index.html yang akan bertindak sebagai halaman utama Monitorix.
+kejadian tersebut juga menciptakan sebuah file bernama <base_dir> /cdi/monitorix.conf.path yang mencakup path absolut dari file konfigurasi. File ini akan dibaca oleh monitorix.cgi untuk menentukan lokasi yang tepat dari file konfigurasi.
+
+
+untuk menggunakannya cukup mudah anda bisa baca di http://www.monitorix.org/doc-debian.html atau menggunakan ansible tapi harus download dulu yml file nya di sini https://github.com/yudikeren/software/blob/master/monitorix.yml lalu jalankan di folder yang sama, contoh
+
+$ sudo ansible-playbook -i "localhost," monitorix.yml -K -c local -vvvv
+
+note:
+- perlu di perhatikan destination folder nya , jangan sampai berbeda dengan tempat eksekusi ansible nya
+
+
+thx 
+
+yudi
