@@ -1,4 +1,5 @@
 ---
+# sudo ansible-playbook -i "localhost," monitorix.yml -K -c local -vvvv
 - name: Install Monitorix ubuntu
   sudo : yes
   hosts: all
@@ -20,7 +21,7 @@
       - libmime-lite-perl
       - libemail-date-format-perl
    - name: download monitorix
-     get_url: url=http://www.monitorix.org/monitorix_3.8.1-izzy1_all.deb dest=/home/deny/
+     get_url: url=http://www.monitorix.org/monitorix_3.8.1-izzy1_all.deb dest=/home/karir/
    - name: install monitorix
      apt: deb=monitorix_3.8.1-izzy1_all.deb
    - name: copy .conf file form the server
