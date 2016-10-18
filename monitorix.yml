@@ -21,9 +21,9 @@
       - libmime-lite-perl
       - libemail-date-format-perl
    - name: download monitorix
-     get_url: url=http://www.monitorix.org/monitorix_3.8.1-izzy1_all.deb dest=/home/karir/
+     get_url: url=http://www.monitorix.org/monitorix_3.9.0-izzy1_all.deb dest=/home/karir/
    - name: install monitorix
-     apt: deb=monitorix_3.8.1-izzy1_all.deb
+     apt: deb=monitorix_3.9.0-izzy1_all.deb
    - name: copy .conf file form the server
      get_url: url=https://raw.githubusercontent.com/yudikeren/software/master/monitorix.conf dest=/etc/monitorix/
    - name: configuring monitorix
